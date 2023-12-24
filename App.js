@@ -54,13 +54,17 @@ export default function App() {
   const getFormApp = async () => {
     const querySnapshot = await getDocs(collection(db, "form"));
     querySnapshot.forEach((doc) => {
-      console.log(doc.id,doc.data());
+      //console.log(doc.id,doc.data());
+      //console.log(formList);
+      //console.log("username: "+doc.data().username);
+      //console.log("surname: "+doc.data().surname);
+      //console.log("email: "+doc.data().email);
+      //console.log("password: "+doc.data().password);
+      setFormList({
+        ...doc.data(),
+        id: doc.id
+      });
       console.log(formList);
-      console.log("username: "+doc.data().username);
-      console.log("surname: "+doc.data().surname);
-      console.log("email: "+doc.data().email);
-      console.log("password: "+doc.data().password);
-      setFormList([...formList, { id: doc.id, ...doc.data() }]);
     });
   }
 
@@ -118,7 +122,10 @@ export default function App() {
         onSubmitEditing={addFormApp}
       />
 
-      <Text>Data: {formList.id}</Text>
+      <Text>ID: {formList.id}</Text>
+      <Text>USERNAME: {formList.username}</Text>
+      <Text>EMAİL: {formList.email}</Text>
+      <Text>ŞİFRE: {formList.password}</Text>
     </SafeAreaView>
   );
 } //end return
